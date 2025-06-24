@@ -86,30 +86,42 @@
             }
             #header{
                 text-align: left;
+                position: relative;
             }
             #header-hamburger{
-                margin-top : 18px;
+                position : absolute;
+                top : 18px;
+                left : -10px;
                 display: inline-block;
-                background-position: -629px -272px;
                 padding : 10px;
-                background-size: 926px 884px;
                 background: none;
                 border : none;
                 cursor : pointer;
-                border-radius: 50%;
                 
             }
-            #header-hamburger:hover{
+            #header-hamburger:hover::before{
+                content:"";
+                position: absolute;
+                left : 1px;
+                top : 1px;
+                width :44px;
+                height : 44px;
                 background-color: var(--color_block_bg);
                 border-radius: 50%;
+                padding : 9px;
+            }
+            #header-hamburger :hover > div{
+                position: relative;
+                left : 1px;
+                top : 1px;
             }
             #header-hamburger > div {
                 background-image: url(./sp_main.png);
-                width : 32px;
-                height : 32px;
+                width : 26px;
+                height : 26px;
                 background-repeat: no-repeat;
-                background-position:  -437px -235px;
-                background-size: 643px 614px;
+                background-position:  -355px -191px;
+                background-size: 522px 499px;
             } 
             #main{
                 height : 2000px;

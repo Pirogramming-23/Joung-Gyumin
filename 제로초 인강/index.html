@@ -18,12 +18,24 @@
                 display: inline-block;
                 background-color: yellow;
             }
+            #header{
+                text-align: left;
+            }
             #header-hamburger{
                 margin-top : 18px;
-                background-color: blue;
-                width : 46px;
-                height : 46px;
+                display: inline-block;
+                background-position: -629px -272px;
+                padding : 10px;
+                background-size: 926px 884px;
             }
+            #header-hamburger > div {
+                background-image: url(./sp_main.png);
+                width : 32px;
+                height : 32px;
+                background-repeat: no-repeat;
+                background-position:  -437px -189px;
+                background-size: 643px 614px;
+            } 
             #main{
                 height : 2000px;
             }
@@ -34,6 +46,7 @@
             <div id="wrap-center">
                 <div id="header">
                     <div id ="header-hamburger">
+                        <div></div>
                     </div>
                 <div id="search"></div>
                 <div id="nav"></div>

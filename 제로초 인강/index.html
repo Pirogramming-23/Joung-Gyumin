@@ -189,19 +189,45 @@
                     #search >form:hover{
                         box-shadow:0 2px 4px 0 rgba(0,0,0,.12);
                     }
-                   
                     #search-svg{
-                        display : inline-block;
+                        display : inline-flex;
+                        justify-content: center;
+                        align-items: center;
                         width : 68px;
                         margin-right : 12px;
                         height : 100%;
                         padding-left : 10px;
-
+                        position : relative;
+                    }
+                    
+                    #search-svg::after{
+                        display: none;
+                    }
+                    #search > form:focus-within #search-svg::after{
+                        
+                        content :'';
+                        width: 1px;
+                        height:20px;
+                        background-color: #e4e4e4;
+                        position : absolute;
+                        display : inline-block;
+                        right : 0;
+                        top: 20px;
                     }
                     #search-svg svg{
                         width : 24px;
-                        padding : 17px 0;
+                        height: 24px;
                         fill: #03c75a;
+                    }
+                    
+                    #search-input{
+                        width : 480px;
+                        padding : 17px 0;
+                        font-size : 2rem;
+                        line-height : 24px;
+                        font-weight : blod;
+                        border : none;
+                        outline : none;
                     }
                     #search > form > input{
                         width : 480px;
@@ -212,15 +238,6 @@
                         border: none;
                         text-align: left;;
                     
-                    }
-                    #search-input{
-                        width : 480px;
-                        padding : 17px 0;
-                        font-size : 2rem;
-                        line-height : 24px;
-                        font-weight : blod;
-                        border : none;
-                        outline : none;
                     }    
                     #search-input::placeholder{
                         color :white;
@@ -266,7 +283,7 @@
                     #search-button{
                         padding : 17px 27px 16px 10px;
                     }
-                    #search-bitton > div{
+                    #search-button > div{
                         background: #03c75a;
                     } 
                     #search-button > div::before{

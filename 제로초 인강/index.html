@@ -678,6 +678,7 @@
                 #main-newstand-animation{
                     padding-left: 25px;
                     position: relative;
+                    display : flex;
 
                 }
                 #main-newstand-animation::before{
@@ -693,6 +694,8 @@
                 }
                 #main-newstand-animation a:first-of-type{
                     vertical-align: top;
+                    top:-1px;
+                    line-height: 26px;
                 }
                 #main-newstand-animation a:first-of-type::after {
                     content: "";
@@ -709,10 +712,31 @@
                 }
                 #main-newstand a:last-of-type{
                     text-overflow: ellipsis;
-                    width: 64px;
+                    width: 43px;
                     white-space: nowrap;
                     display: inline-block;
                     overflow: hidden;
+                }
+                #main-newstand-gray .right{
+                    display: flex;
+                }
+                #main-newstand-gray .blod{
+                    font-weight: bold;
+                    padding-left: 25px;
+                    position: relative;
+
+                }
+                #main-newstand-gray .bold::before{
+                    content: " ";
+                    display: block;
+                    position: absolute;
+                    top: 7px;
+                    left: 12px;
+                    height: 12px;
+                    width: 1px;
+                    height: 12px;
+                    background-color: #d3d5d7;
+                    background-color: var(--color_dot_divider);
                 }
                 #main-newstand a {
                     text-decoration : none;
@@ -766,11 +790,11 @@
                                         <a href="#">전체언론사</a>
                                         <div id="main-newstand-animation">
                                             <a href="#">연합뉴스</a>
-                                            <a href="#">뉴스내용</a>
+                                            <a href="#">뉴스내용뉴스내용뉴스내용뉴스내용뉴스내용뉴스내용뉴스내용</a>
                                         </div>
                                         <div class="right">
                                             <a href="#">뉴스스탠드</a>
-                                            <a href="#">뉴스홈</a>
+                                            <a href="#" class="bold">뉴스홈</a>
                                         </div>
                                         
                                     </div>

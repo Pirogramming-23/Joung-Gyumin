@@ -178,11 +178,12 @@
                 </div>
                 <style>
                     #search > form{
-                        display : inline-block;
+                        display : inline-flex;
                         width : 708px;
                         height: 60px;
                         border : 1px solid #03c75a;
                         border-radius: 33px;
+                        text-align: left;
 
                     }
                     #search > form > input{
@@ -202,7 +203,7 @@
                         border-radius: 33px;
                         text-align: left;         
                     }
-                    #search -svg{
+                    #search-svg{
                         display : inline-block;
                         width : 68px;
                         margin-right : 12px;
@@ -215,7 +216,7 @@
                         padding : 17px 0;
                         fill: #03c75a;
                     }   
-                    #search-inpiut{
+                    #search-input{
                         width : 480px;
                         padding : 17px 0;
                         font-size : 2rem;
@@ -226,11 +227,20 @@
                     }      
                     #search-right{
                         display : inline-block;
+                        flex : 1;
+                        display : flex;
+                        align-items: stretch;
+                        justify-content: flex-end;
                     }
-                    #search-keyboard ::before{
+                    #search-keyboard, #search-recent, #search-button{
+                        background:transparent;
+                        border :none;
+                        cursor: pointer;
+                    } 
+                    #search-keyboard::before{
                             content: "";
                             display: block;
-                            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+                            background-image: url(./sp_main.png);
                             background-size: 463px 442px;
                             background-position: -148px -301px;
                             background-repeat: no-repeat;
@@ -240,15 +250,15 @@
                     #search-recent::before{
                             content: "";
                             display: block;
-                            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+                            background-image: url(./sp_main.png);
                             background-size: 463px 442px;
                             background-position: -453px -422px;
                             background-repeat: no-repeat;
                             width: 10px;
                             height: 6px;
                     } 
-                    #search-button::before {
-                            background-image: url(https://pm.pstatic.net/resources/asset/sp_main.04eb92b7.png);
+                    #search-button::before{
+                            background-image: url(./sp_main.png);
                             background-size: 463px 442px;
                             background-position: -405px -79px;
                             background-repeat: no-repeat;
@@ -273,7 +283,6 @@
                                 <div><span class="blind">검색</span></div>
                             </button>
                         </div>
-                        <button class="blind">검색</button>
                     </form>
                 </div>
                 <div id="nav"></div>

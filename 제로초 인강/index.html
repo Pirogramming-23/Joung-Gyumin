@@ -602,16 +602,23 @@
                     font-size : 1.6rem;
                     color : rgba(8,8,8,.5);
                     display: flex;
-                    justify-content:flex-start;
+                    justify-content : flex-start;
+                    line-height:  23px;
+                    margin-bottom: 17px;
                 }
                 #main-newstand header .bold{
                     font-weight: bold;
                     color : black;
                 }
                 #main-newstand-gray{
-                    
+                    height : 50px;
+                    padding : 12px 20px;
                     display: flex;
-                    justify-content:flex-start;
+                    justify-content : flex-start;
+                    background-color: var(--color_option_bg);
+                    border-radius: 4px;
+                    
+                    background-color: black;
                 }
                 #main-newstand a {
                     text-decoration : none;
@@ -622,9 +629,29 @@
                 #main-newstand a:hover {
                     text-decoration : underline;
                 }
+                #main-newstand-grid{
+                    display : grid;
+                    justify-content: center;
+                    align-items: center;
+                    grid-gap : 1px;
+                    height : 224px;
+                    background-color: var(--color_border_in);
+                    grid-template-rows: repeat(4, 1fr)  ;
+                    width: 790px;
+                    grid-template-columns: repeat(6, 1fr)  ;
+                    border : 1px solid var(--color_border_in);
+                    border-radius: 4px;
+                    margin-top : 18px;
+                }
+                #main-newstand-grid > div {
+                    height : 100%;
+                    background-color :  white ;
+                }
                 #main-newstand footer{
                     padding : 10px 0 11px;
                     border-top : 1px solid var(--color_border_in);
+                    display: flex;
+                    justify-content : center;
                 }
                 </style>
                 <main id="main">

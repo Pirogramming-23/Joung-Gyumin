@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="nav-container">
+      <div class="nav-left">
+        <img src="github-logo.png" alt="GitHub Logo" class="logo" />
+        <nav class="nav-menu">
+          <a href="#">Why GitHub?</a>
+          <a href="#">Team</a>
+          <a href="#">Enterprise</a>
+          <a href="#">Explore</a>
+          <a href="#">Marketplace</a>
+          <a href="#">Pricing</a>
+        </nav>
+      </div>
+      <div class="nav-right">
+        <input type="text" placeholder="Search GitHub" class="search-bar" />
+        <a href="#" class="btn-signin">Sign in</a>
+        <a href="#" class="btn-signup">Sign up</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap-center">
+    <main class="main">
+      <section class="left">
+        <h1>Built for developers</h1>
+        <p>
+          GitHub is a development platform inspired by the way you work.
+          From <strong>open source</strong> to <strong>business</strong>,
+          you can host and review code, manage projects, and build software
+          alongside 50 million developers.
+        </p>
+      </section>
+
+      <section class="right">
+        <form class="signup-form">
+          <label for="username">Username</label>
+          <input type="text" id="username" />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" />
+
+          <label for="password">Password</label>
+          <input type="password" id="password" />
+          <small>
+            Make sure it's at least 15 characters OR at least 8 characters
+            including a number and a lowercase letter.
+            <a href="#">Learn more</a>.
+          </small>
+
+          <button type="submit">Sign up for GitHub</button>
+
+          <p class="terms">
+            By clicking “Sign up for GitHub”, you agree to our
+            <a href="#">Terms of Service</a> and
+            <a href="#">Privacy Statement</a>.
+          </p>
+        </form>
+      </section>
+
+      <!-- 일러스트 (겹침용) -->
+      <img class="illustration-floating" src="footer.webp" alt="GitHub Illustration" />
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+/* 전체 화면 고정 */
+html, body {
+    width: 100%;
+    height: 983px;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background-color: white;
+    overflow: hidden;
+}
+.header {
+    background-color: #0d1117;
+    padding: 16px 40px;
+    border-bottom: 1px solid #30363d;
+    color: white;
+    font-size: 14px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    height: 24px;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    margin-right: 16px;
+}
+
+.nav-menu a:hover {
+    text-decoration: underline;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-bar {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.btn-signin,
+.btn-signup {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #8b949e;
+}
+
+.btn-signup {
+    background-color: transparent;
+}
+
+.btn-signin:hover,
+.btn-signup:hover {
+    background-color: #21262d;
+}
+
+
+/* 중앙 정렬 컨테이너 */
+.wrap-center {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px;
+}
+
+/* 메인 영역 */
+.main {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    background-color: #0d1117;
+    color: white;
+    padding: 100px 0;
+    gap: 80px;
+    position: relative;
+    overflow: visible;
+}
+
+/* 왼쪽 텍스트 */
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 40px;
+}
+
+.left h1 {
+    font-size: 60px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.left p {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #c9d1d9;
+}
+
+/* 오른쪽 폼 */
+.right {
+    background: white;
+    color: black;
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 520px;
+    align-self: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form label {
+    margin: 12px 0 4px;
+    font-weight: bold;
+}
+
+.signup-form input {
+    padding: 14px;
+    font-size: 16px;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+}
+
+.signup-form small {
+    font-size: 13px;
+    color: #57606a;
+    margin-top: 8px;
+}
+
+.signup-form button {
+    margin-top: 20px;
+    padding: 16px;
+    background-color: #2ea44f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.signup-form button:hover {
+    background-color: #238636;
+}
+
+.terms {
+    font-size: 13px;
+    margin-top: 20px;
+    color: #57606a;
+}
+
+/* 겹쳐진 일러스트 */
+.illustration-floating {
+    position: absolute;
+    bottom: -60px;
+    right: 0;
+    height: 120px;
+    z-index: 2;
+}
+

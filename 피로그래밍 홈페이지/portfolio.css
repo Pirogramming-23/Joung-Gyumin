@@ -442,6 +442,8 @@ button, input {
 }
 
 
+
+
 .project-list {
     display: grid;
     grid-template-columns: 1fr; /* 기본: 세로 한 줄 */

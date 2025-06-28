@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Nexon", sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-color: #000;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+ul, li, ol {
+    list-style: none;
+}
+
+#iv-section {
+    min-height: 90vh;
+    padding: 90px var(--offset) 50px;
+}
+
+.interview-contents {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gutter);
+}
+
+@media screen and (max-width: 850px) {
+    .interview-contents {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (max-width: 600px) {
+    .interview-contents {
+        grid-template-columns: 1fr;
+    }
+}
+
+.interview-card {
+    background-color: var(--bg-gray);
+    border-radius: 10px;
+    padding: var(--gutter);
+    position: relative;
+    cursor: pointer;
+    display: flex; /* 수평 정렬 추가 */
+    align-items: center;
+    gap: var(--gutter);
+    transition: 0.3s;
+}
+
+.interview-profile--pic {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.interview-profile--pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+.interview-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.interview-info h3 {
+    font-size: var(--heading3);
+    font-weight: 900;
+}
+
+.interview-info p {
+    font-size: var(--body1);
+    color: var(--subtext-gray);
+}
+
+/* 햄버거 버튼 효과용 */
+.project-more {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: var(--gutter);
+    top: var(--gutter);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.project-more > div {
+    width: 100%;
+    height: 2px;
+    background-color: var(--bg-5);
+    transition: 0.3s;
+}
+
+.project-more > div:nth-child(1) {
+    margin-right: auto;
+}
+.project-more > div:nth-child(3) {
+    margin-left: auto;
+}
+
+.interview-card:hover .project-more > div:nth-child(1),
+.interview-card:hover .project-more > div:nth-child(3) {
+    width: 50%;
+}
+
+.major-badge,
+.non-major-badge,
+.double-major-badge {
+    padding: 4px 8px;
+    font-size: var(--body2);
+    font-weight: 500;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+    width: fit-content;
+}
+
+.major-badge {
+    background-color: var(--blue);
+}
+
+.non-major-badge {
+    background-color: var(--red);
+}
+
+.double-major-badge {
+    background-color: var(--badge-green);
+}
+.interview-name-and-badge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.interview-info p:last-child {
+    margin: 0;
+}
+
+.section-th {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+.section-th--next,
+.section-th--prev {
+    width: 100px; /* 좌우 공간 확보용 */
+}
+
+.section-th--prev{
+    font-size: 1.8rem;
+}
+.section-th--curr {
+    flex: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.2rem;   
+}
+.ri-arrow-right-s-line:before {
+    content: "";
+    background-image: url(./images.png);
+    background-color: white;
+    width: 24px;
+}
+

@@ -92,12 +92,12 @@ body{
   margin: var(--base-space);
 }
 
-.item_thumbnail {
+.item__thumbnail {
   width: var(--size-thumbnail);
   height: var(--size-thumbnail);
 }
 
-.item_description{
+.item__description{
   margin-left: var(--base-space);
   font-size: var(--font-size);
 }

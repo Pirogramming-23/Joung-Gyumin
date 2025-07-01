@@ -23,7 +23,7 @@
         },
         {
             "type":"skirt",
-            "gender": "male",
+            "gender": "female",
             "size":"large",
             "color": "yellow",
             "image": "./img/yellow_s.png"
@@ -68,7 +68,7 @@
             "gender": "female",
             "size":"large",
             "color": "pink",
-            "image": "./img/pink_p.png"
+            "image": "./img/pink_s.png"
         }
     ]
 }

@@ -7,6 +7,11 @@ while True:
         print("정수를 입력하세요")
     else:
         if count == "1" or count == "2" or count == "3":
+            count = int(count)
             break
         else:
             print("1,2,3 중 하나를 입력하세요")
+
+for i in range(1, count+1):
+    num = num+1
+    print(f"playerA : {num}")

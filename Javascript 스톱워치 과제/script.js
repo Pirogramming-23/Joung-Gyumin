@@ -14,8 +14,8 @@ let startTime = 0;
 let elapsedTime = 0;
 let timerInterval = null;
 
-let isTimerMode = false; // ✅ 타이머 모드 여부
-let countdownTime = 0;   // ✅ 타이머 총 시간
+let isTimerMode = false; 
+let countdownTime = 0;   
 
 function formatTime(ms) {
     const seconds = String(Math.floor(ms / 1000)).padStart(2, '0');
@@ -32,7 +32,7 @@ timerBtn.addEventListener("click", () => {
 startBtn.addEventListener("click", () => {
     if (timerInterval) return;
 
-    // ✅ 타이머 모드일 경우
+    //타이머
     if (isTimerMode) {
         const min = parseInt(minuteInput.value) || 0;
         const sec = parseInt(secondInput.value) || 0;
@@ -60,7 +60,7 @@ startBtn.addEventListener("click", () => {
         }, 10);
     }
     
-    // ⏱ 일반 스톱워치 모드
+    //일반 스톱워치 모드
     else {
         startTime = Date.now() - elapsedTime;
         timerInterval = setInterval(() => {

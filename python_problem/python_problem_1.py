@@ -16,10 +16,11 @@ while num < 31:
         num += 1
         print(f"playerA : {num}")
         if num == 31:
+            print("playerB win!")
             break
     if num == 31:
         break
-    
+
     while True:
         count = input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능): ")
         if not count.isdigit():
@@ -34,4 +35,5 @@ while num < 31:
         num += 1
         print(f"playerB : {num}")
         if num == 31:
+            print("playerA win!")
             break

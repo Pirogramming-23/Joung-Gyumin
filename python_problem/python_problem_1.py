@@ -28,10 +28,10 @@ def brGame(player, num):
 num = 0
 
 while num < 31:
-    num = brGame("player", num)
+    num = brGame("computer", num)
     if num == 31:
         break
-
-    num = brGame("computer", num)
+    
+    num = brGame("player", num)
     if num == 31:
         break

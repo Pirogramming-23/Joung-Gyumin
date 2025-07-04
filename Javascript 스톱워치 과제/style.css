@@ -121,3 +121,26 @@ button:hover {
     border: none;
     cursor: pointer;
 }
+
+.timer-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #fff;
+}
+
+.timer-input label {
+    font-weight: bold;
+}
+
+.timer-input input {
+    width: 60px;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    text-align: center;
+}

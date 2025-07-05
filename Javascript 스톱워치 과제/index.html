@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>피로그래밍 스톱워치</title>
+        <link rel="stylesheet" href="style.css" />
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <h1>⏱ 피로그래밍 스톱워치</h1>
+
+        <div class="stopwatch-box">
+            <div class="timer-input">
+                <span>분:</span>
+                <input type="number" id="minuteInput" min="0" value="0">
+                <span>초:</span>
+                <input type="number" id="secondInput" min="0" value="0">
+            </div>
+
+            <div id="display" class="time">00.00</div>
+            <div class="buttons">
+                <button id="start">start</button>
+                <button id="stop">stop</button>
+                <button id="reset">reset</button>
+                <button id="timer">timer</button>
+                
+            </div>
+        </div>
+
+        <div class="record-box">
+            <div class="record-header">
+                <input type="checkbox" id="selectAll" />
+                <span>구간 기록</span>
+                <button id="deleteSelected" title="선택 삭제"><i class="ri-delete-bin-6-line"></i></button>
+            </div>
+            <ul id="lapList" class="lap-list">
+            
+            </ul>
+        </div>
+    
+
+        <script src="script.js"></script>
+    </body>
+</html>

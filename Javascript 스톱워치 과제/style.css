@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard', sans-serif;
+}
+
+body {
+    background: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+}
+
+h1 {
+    font-size: 22px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.stopwatch-box {
+    background-color: #819A91;
+    padding: 20px 40px 3px 40px;
+    border-radius: 40px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+#display {
+    font-size: 48px;
+    font-weight: bold;
+    background: #ffffff;
+    padding: 5px 60px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    color: #000;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 9999px;  /* 또는 25px 이상 */
+    background: #e0e0e0;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+button:hover {
+    background: #d0d0d0;
+}
+
+/* 구간 기록 */
+.record-box {
+    background: #b7c3a1;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.record-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 0px 0px 0px 24px;
+}
+
+#lapList {
+    list-style: none;
+}
+
+#lapList li {
+    background: #ffffff;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#lapList input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+}
+
+#lapList input[type="checkbox"]:checked::before {
+    content: "✔";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    transform: translate(-12%, -57%);
+    display: none;
+    color : green;
+}
+#lapList input[type="checkbox"]:checked {
+    background-color: transparent;
+    border-color: #333;
+}
+
+#lapList input[type="checkbox"]:checked::before {
+    display: block;
+}
+
+#deleteAll {
+    background: none;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.timer-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.timer-input label {
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-input input {
+    width: 50px;
+    padding: 0px 1px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    background-color: #fefefe;
+    color: #333;
+}
+input[type="checkbox"] {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #333;
+    border-radius: 50%; 
+    background-color: #fff;
+    position: relative;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked::before {
+    content: "✔";
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    width: 12px;
+    height: 12px; 
+    border-radius: 50%;
+    color: green;     
+}

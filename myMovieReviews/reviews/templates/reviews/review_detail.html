@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ review.title }}</title>
+    </head>
+    <body>
+        <h1>{{ review.title }}</h1>
+        {% if review.image %}
+            <img src="{{ review.image.url }}" alt="{{ review.title }}" style="max-width:300px;">
+        {% endif %}
+        <p>개봉년도: {{ review.release_year }}</p>
+        <p>장르: {{ review.genre }}</p>
+        <p>별점: {{ review.rating }}</p>
+        <p>러닝타임: {{ review.running_time }}분</p>
+        <p>감독: {{ review.director }}</p>
+        <p>출연진: {{ review.actors }}</p>
+        <p>리뷰 내용: {{ review.content }}</p>
+
+        <a href="{% url 'review_list' %}">← 리뷰 목록으로</a>
+    </body>
+</html>

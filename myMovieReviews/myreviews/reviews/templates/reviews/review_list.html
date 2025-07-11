@@ -24,7 +24,11 @@
                 {% if review.image %}
                     <img src="{{ review.image.url }}" alt="{{ review.title }}">
                 {% endif %}
-                <h3>{{ review.title }}</h3>
+                <h3>
+                    <a href="{% url 'review_detail' review.pk %}" style="text-decoration: none; color: inherit;">
+                        {{ review.title }}
+                    </a>
+                </h3>
                 <p>개봉년도 {{ review.year }}년</p>
                 <p>장르 {{ review.genre }}</p>
                 <p>별점 {{ review.rating }}</p>

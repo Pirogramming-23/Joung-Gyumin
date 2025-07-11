@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ review.title }}</title>
+    </head>
+    <body>
+        <h1>{{ review.title }}</h1>
+        <p>개봉년도: {{ review.year }}</p>
+        <p>장르: {{ review.genre }}</p>
+        <p>별점: {{ review.rating }}</p>
+
+        <a href="{% url 'review_list' %}">← 리뷰 목록으로</a>
+    </body>
+</html>

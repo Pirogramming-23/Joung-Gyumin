@@ -2,13 +2,89 @@
 <html>
     <head>
         <title>리뷰 작성</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f8f9fa;
+            }
+
+            .form-container {
+                width: 600px;
+                margin: 60px auto;
+                background-color: #ffffff;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+
+            h1 {
+                text-align: center;
+                color: #333;
+                margin-bottom: 25px;
+            }
+
+            label {
+                display: block;
+                font-weight: bold;
+                margin-top: 15px;
+                margin-bottom: 5px;
+                color: #555;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            textarea,
+            input[type="file"] {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 14px;
+            }
+
+            textarea {
+                height: 120px;
+                resize: vertical;
+            }
+
+            button {
+                display: block;
+                width: 100%;
+                margin-top: 25px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 12px;
+                font-size: 16px;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+        </style>
     </head>
     <body>
-        <h1>리뷰 작성</h1>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">저장</button>
-        </form>
+        <div class="form-container">
+            <h1>리뷰 작성</h1>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{ form.non_field_errors }}
+
+                {% for field in form %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <p style="color: red; font-size: 13px;">{{ field.errors|striptags }}</p>
+                    {% endif %}
+                {% endfor %}
+
+                <button type="submit">저장</button>
+            </form>
+        </div>
     </body>
 </html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Movie Reviews</title>
+        <style>
+            .card {
+                display: inline-block;
+                margin: 20px;
+                padding: 10px;
+                width: 150px;
+                background-color: #f5f5f5;
+            }
+            img {
+                width: 100%;
+                height: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>my <span style="color:red;">Movie</span> reviews</h1>
+
+        {% for review in reviews %}
+            <div class="card">
+                {% if review.image %}
+                    <img src="{{ review.image.url }}" alt="{{ review.title }}">
+                {% endif %}
+                <h3>{{ review.title }}</h3>
+                <p>개봉년도 {{ review.year }}년</p>
+                <p>장르 {{ review.genre }}</p>
+                <p>별점 {{ review.rating }}</p>
+            </div>
+        {% endfor %}
+    </body>
+</html>

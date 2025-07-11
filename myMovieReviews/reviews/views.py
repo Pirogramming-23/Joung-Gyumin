@@ -3,7 +3,7 @@ from .models import Review
 from .forms import ReviewForm
 # Create your views here.
 def review_list(request):
-    reviews = Review.objects.all()
+    reviews = Review.objects.all().order_by('-rating')
     return render(request, 'reviews/review_list.html', {'reviews': reviews})
 
 def review_detail(request, pk): 

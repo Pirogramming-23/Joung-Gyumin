@@ -2,20 +2,48 @@
 <html>
     <head>
         <title>{{ review.title }}</title>
+        <style>
+            .container {
+                width: 700px;
+                margin: auto;
+                background-color: #f7f7f7;
+                padding: 20px;
+            }
+            img {
+                max-width: 200px;
+                float: left;
+                margin-right: 20px;
+            }
+        </style>
     </head>
     <body>
-        <h1>{{ review.title }}</h1>
-        {% if review.image %}
-            <img src="{{ review.image.url }}" alt="{{ review.title }}" style="max-width:300px;">
-        {% endif %}
-        <p>개봉년도: {{ review.release_year }}</p>
-        <p>장르: {{ review.genre }}</p>
-        <p>별점: {{ review.rating }}</p>
-        <p>러닝타임: {{ review.running_time }}분</p>
-        <p>감독: {{ review.director }}</p>
-        <p>출연진: {{ review.actors }}</p>
-        <p>리뷰 내용: {{ review.content }}</p>
+        <div class="container">
+            <h2>
+                <a href="{% url 'review_list' %}" style="text-decoration: none;">
+                    My <span style="color: red;">Movie</span> reviews
+                </a>
+            </h2>
+            <h1>{{ review.title }}</h1>
 
-        <a href="{% url 'review_list' %}">← 리뷰 목록으로</a>
+            {% if review.image %}
+                <img src="{{ review.image.url }}" alt="{{ review.title }}">
+            {% endif %}
+
+            <p><strong>개봉년도:</strong> {{ review.release_year }}</p>
+            <p><strong>감독:</strong> {{ review.director }}</p>
+            <p><strong>주연:</strong> {{ review.actors }}</p>
+            <p><strong>장르:</strong> {{ review.genre }}</p>
+            <p><strong>별점:</strong> {{ review.rating }}</p>
+            <p><strong>러닝타임:</strong> {{ review.running_time }}분</p>
+
+            <p style="clear: both;"><strong>리뷰 내용:</strong><br>{{ review.content }}</p>
+
+            <hr>
+            <p>
+                <a href="{% url 'review_edit' review.pk %}">✏️ 수정</a> |
+                <a href="{% url 'review_delete' review.pk %}">🗑 삭제</a> |
+                <a href="{% url 'review_list' %}">← 목록</a>
+            </p>
+        </div>
     </body>
 </html>

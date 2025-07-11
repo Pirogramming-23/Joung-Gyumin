@@ -1,14 +1,49 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>리뷰 삭제</title>
+        <title>리뷰 삭제 확인</title>
+        <style>
+            .delete-box {
+                max-width: 600px;
+                margin: 100px auto;
+                padding: 30px;
+                background-color: #fefefe;
+                border: 2px solid #ddd;
+                border-radius: 12px;
+                text-align: center;
+                font-family: Arial, sans-serif;
+            }
+            .delete-box h2 {
+                color: #333;
+            }
+            .delete-box button {
+                padding: 10px 20px;
+                background-color: crimson;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            .delete-box button:hover {
+                background-color: darkred;
+            }
+            .cancel-link {
+                margin-left: 15px;
+                font-size: 15px;
+                color: #555;
+                text-decoration: underline;
+            }
+        </style>
     </head>
     <body>
-        <h2>‘{{ review.title }}’ 리뷰를 정말 삭제할까요?</h2>
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit">🗑 삭제하기</button>
-            <a href="{% url 'review_detail' review.pk %}">취소</a>
-        </form>
+        <div class="delete-box">
+            <h2>‘{{ review.title }}’ 리뷰를 정말 삭제할까요?</h2>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit">🗑 삭제하기</button>
+                <a class="cancel-link" href="{% url 'review_detail' review.pk %}">취소</a>
+            </form>
+        </div>
     </body>
 </html>

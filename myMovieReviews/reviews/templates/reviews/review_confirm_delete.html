@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>리뷰 삭제</title>
+    </head>
+    <body>
+        <h2>‘{{ review.title }}’ 리뷰를 정말 삭제할까요?</h2>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">🗑 삭제하기</button>
+            <a href="{% url 'review_detail' review.pk %}">취소</a>
+        </form>
+    </body>
+</html>

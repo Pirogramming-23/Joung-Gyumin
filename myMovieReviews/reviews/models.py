@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Review(models.Model):
     title = models.CharField("제목", max_length=100)
-    release_year = models.PositiveIntegerField("개봉년도", null=True, blank=True)  # ✅ 추가
+    release_year = models.PositiveIntegerField("개봉년도", null=True, blank=True)
     genre = models.CharField("장르", max_length=50)
     rating = models.FloatField("평점")
     running_time = models.IntegerField("러닝타임(분)", null=True, blank=True)

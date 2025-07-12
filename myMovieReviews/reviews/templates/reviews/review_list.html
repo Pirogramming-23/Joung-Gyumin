@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Movie Reviews</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', sans-serif;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 30px 50px 10px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #eee;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+                font-weight: 700;
+                color: #333;
+            }
+
+            .logo-red {
+                color: #e74c3c;
+            }
+            .new-review-link,
+            .new-review-link:visited,
+            .new-review-link:active,
+            .new-review-link:focus {
+                color: black;
+                text-decoration: none;
+                font-weight: bold;
+            }
+            .new-review-link {
+                font-size: 14px;
+            }
+            
+            .new-review-link:hover {
+                text-decoration: underline;
+            }
+
+            .review-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 30px;
+                justify-content: space-evenly;
+                max-width: 1200px;
+                margin: 40px auto;
+            }
+
+            .card {
+                background-color: white;
+                width: 200px;
+                padding: 15px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                border-radius: 10px;
+                transition: transform 0.2s ease;
+            }
+
+            .card:hover {
+                transform: translateY(-5px);
+            }
+
+            .card img {
+                width: 100%;
+                height: auto;
+                border-radius: 6px;
+                margin-bottom: 10px;
+            }
+
+            .card h3 {
+                margin: 0;
+                font-size: 18px;
+                color: #212529;
+            }
+
+            .card p {
+                margin: 4px 0;
+                color: #555;
+                font-size: 14px;
+            }
+
+            .card a {
+                text-decoration: none;
+                color: inherit;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page-header">
+            <h1>
+                <span>My</span><span class="logo-red"> Movie</span> reviews</h1>
+            <a href="{% url 'review_create' %}" class="new-review-link">Add a New review</a>
+        </div>
+
+        <div class="review-grid">
+            {% for review in reviews %}
+                <div class="card">
+                    {% if review.image %}
+                        <img src="{{ review.image.url }}" alt="{{ review.title }}">
+                    {% endif %}
+                    <h3>
+                        <a href="{% url 'review_detail' review.pk %}">
+                            {{ review.title }}
+                        </a>
+                    </h3>
+                    <p>개봉년도 {{ review.release_year }}년</p>
+                    <p>장르 {{ review.genre }}</p>
+                    <p>별점 {{ review.rating }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>

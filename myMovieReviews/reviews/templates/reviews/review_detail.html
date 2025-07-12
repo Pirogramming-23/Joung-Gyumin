@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ review.title }}</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', sans-serif;
+                background-color: #f9f9f9;
+                margin: 0;
+            }
+
+            .detail-body {
+                padding: 50px;
+            }
+
+            .page-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 30px 50px 10px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #eee;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+                font-weight: 700;
+                color: #333;
+            }
+
+            .logo-red {
+                color: #e74c3c;
+            }
+
+            .detail-container {
+                max-width: 1200px;
+                background-color: #fff;
+                margin: auto;
+                padding: 40px 60px;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .review-title {
+                font-size: 28px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                color: #212529;
+            }
+
+            .review-content {
+                display: flex;
+                gap: 25px;
+            }
+
+            .poster {
+                flex: 1;
+            }
+
+            .poster img {
+                width: 100%;
+                border-radius: 6px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .info {
+                flex: 2;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                font-size: 16px;
+                color: #333;
+            }
+
+            .info strong {
+                display: inline-flex;
+                width: 90px;
+                color: #000;
+            }
+
+            .review-body {
+                margin-top: 30px;
+                font-size: 15px;
+                line-height: 1.6;
+                border-bottom: 2px solid #eee;
+                padding-bottom: 30px;
+            }
+
+            .review-body b {
+                color: #000;
+            }
+
+            .buttons {
+                margin-top: 10px;
+                border-top: 1px solid #ccc;
+                padding-top: 20px;
+                display: flex;
+                gap: 16px;
+                font-size: 20px;
+            }
+
+            .buttons a {
+                text-decoration: none;
+                color: #6a1b9a;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+            .buttons a:hover {
+                text-decoration: underline;
+            }
+            .new-review-link,
+            .new-review-link:visited,
+            .new-review-link:active,
+            .new-review-link:focus {
+                color: black;
+                text-decoration: none;
+                font-weight: bold;
+            }
+            .new-review-link {
+                font-size: 14px;
+            }
+
+            .new-review-link:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page-header">
+            <a href="{% url 'review_list' %}" class="logo-link" style="text-decoration: none;">
+                <h1>
+                    <span>My</span><span class="logo-red"> Movie</span> reviews</h1>
+                </h1>
+            </a>
+            <a href="{% url 'review_create' %}" class="new-review-link">Add a New review</a>
+        </div>
+        <div class="detail-body">
+            <div class="detail-container">
+                <div class="review-title">{{ review.title }}</div>
+
+                <div class="review-content">
+                    <div class="poster">
+                        {% if review.image %}
+                            <img src="{{ review.image.url }}" alt="{{ review.title }}">
+                        {% endif %}
+                    </div>
+                    <div class="info">
+                        <p><strong>개봉년도:</strong> {{ review.release_year }}</p>
+                        <p><strong>감독:</strong> {{ review.director }}</p>
+                        <p><strong>주연:</strong> {{ review.actors }}</p>
+                        <p><strong>장르:</strong> {{ review.genre }}</p>
+                        <p><strong>별점:</strong> {{ review.rating }}</p>
+                        <p><strong>러닝타임:</strong> {{ review.running_time }}분</p>
+                    </div>
+                </div>
+
+                <div class="review-body">
+                    <b>리뷰 내용:</b><br>
+                    {{ review.content }}
+                </div>
+
+                <div class="buttons">
+                    <a href="{% url 'review_edit' review.pk %}"> ✏️ 수정</a>
+                    <a href="{% url 'review_delete' review.pk %}"> 🗑️ 삭제</a>
+                    <a href="{% url 'review_list' %}"> ← 목록</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

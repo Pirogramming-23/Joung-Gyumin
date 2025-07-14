@@ -9,4 +9,4 @@ https://www.erdcloud.com/p/rvpyPBswR3MayNiFs
 
 ## 📸 ERD 캡처 이미지
 
-![ERD 캡처](./erd_capture.png)
+![ERD 캡처](./erd_capture.png.png)

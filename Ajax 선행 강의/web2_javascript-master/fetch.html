@@ -5,12 +5,17 @@
 
         </article>
         <input type="button" value="fetch" onclick="
-            fetch('html').then(function(response){
-                response.text().then(function(text){
-                    alert(text);
-                    document.querySelector('article').innerHTML = text;
-                })
-            })
+            // fetch('html').then(function(response){
+            //     response.text().then(function(text){
+            //         alert(text);
+            //         document.querySelector('article').innerHTML = text;
+            //     })
+            // })
+            function callbackme(){
+                console.log('response end')
+
+            }
+            fetch('html').then(callbackme);
         ">
    </body>
 </html>

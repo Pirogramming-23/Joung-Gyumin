@@ -11,11 +11,15 @@
             //         document.querySelector('article').innerHTML = text;
             //     })
             // })
-            function callbackme(){
-                console.log('response end')
-
-            }
-            fetch('html').then(callbackme);
+            // Asynchronous
+            fetch('html').then(function(response){
+                console.log('response.status');
+                if(response.status == '404'){
+                    alert('Not found')
+                }
+            });
+            console.log(1);
+            console.log(2);
         ">
    </body>
 </html>

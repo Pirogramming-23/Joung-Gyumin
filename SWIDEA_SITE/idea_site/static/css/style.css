@@ -1,0 +1,30 @@
+.navbar {
+  background-color: #1e1e1e;
+  color: white;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 18px;
+}
+
+.navbar .logo {
+  font-weight: bold;
+  color: #aaffcc;
+}
+
+.navbar .logo span {
+  color: gold;
+}
+
+.navbar a {
+  margin-right: 30px;
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.navbar a:hover {
+  color: #00f2ff;
+}

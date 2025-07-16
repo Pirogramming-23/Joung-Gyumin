@@ -1,0 +1,68 @@
+{% extends 'ideas/base.html' %}
+<meta name="csrf-token" content="{{ csrf_token }}">
+
+{% block title %}아이디어 리스트{% endblock %}
+
+{% block content %}
+<h1>💡 아이디어 리스트</h1>
+
+<p>
+    <a href="{% url 'idea_create' %}">
+        <button>➕ 아이디어 등록하기</button>
+    </a>
+</p>
+
+<form method="get">
+    <select name="order" onchange="this.form.submit()">
+        <option value="created_at" {% if order == 'created_at' %}selected{% endif %}>최신순</option>
+        <option value="interest" {% if order == 'interest' %}selected{% endif %}>관심도순</option>
+        <option value="title" {% if order == 'title' %}selected{% endif %}>이름순</option>
+    </select>
+</form>
+
+<hr>
+
+{% for idea in ideas %}
+    <div>
+        <img src="{{ idea.image.url }}" width="150">
+        <h2>
+            <a href="{% url 'idea_detail' idea.id %}">{{ idea.title }}</a>
+            <span class="star star-icon" data-id="{{ idea.id }}">
+                {% if idea.is_starred %}
+                    🌟
+                {% else %}
+                    ⭐
+                {% endif %}
+            </span>
+        </h2>
+        <p>{{ idea.content|truncatewords:20 }}</p>
+        <p>관심도: {{ idea.interest }}</p>
+    </div>
+    <hr>
+{% empty %}
+    <p>등록된 아이디어가 없습니다.</p>
+{% endfor %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const stars = document.querySelectorAll(".star-icon");
+
+    stars.forEach(star => {
+        star.addEventListener("click", function () {
+            const ideaId = this.dataset.id;
+            fetch(`/ideas/${ideaId}/toggle_star/`, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                this.textContent = data.is_starred ? "🌟" : "⭐";
+            });
+        });
+    });
+});
+</script>
+
+{% endblock %}

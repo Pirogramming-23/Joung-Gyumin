@@ -1,0 +1,20 @@
+{% extends 'ideas/base.html' %}
+{% block title %}개발툴 목록{% endblock %}
+
+{% block content %}
+<h1>🛠️ 개발툴 목록</h1>
+
+<a href="{% url 'devtool_create' %}">
+    <button>➕ 개발툴 등록</button>
+</a>
+
+<hr>
+
+{% for tool in tools %}
+    <p>
+        🔗 <a href="{% url 'devtool_detail' tool.id %}">{{ tool.name }}</a> ({{ tool.kind }})
+    </p>
+{% empty %}
+    <p>등록된 개발툴이 없습니다.</p>
+{% endfor %}
+{% endblock %}

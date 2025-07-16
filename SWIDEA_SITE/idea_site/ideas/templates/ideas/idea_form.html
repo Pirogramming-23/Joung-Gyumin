@@ -1,0 +1,13 @@
+{% extends 'ideas/base.html' %}
+{% block content %}
+<h1>{% if form.instance.pk %}아이디어 수정
+    {% else %}아이디어 등록{% endif %}</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if form.instance.pk %}수정 완료{% else %}등록하기{% endif %}</button>
+</form>
+
+<a href="{% url 'idea_list' %}">← 돌아가기</a>
+{% endblock %}

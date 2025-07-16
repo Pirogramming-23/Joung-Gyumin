@@ -6,50 +6,50 @@
 {% block content %}
 <style>
 body {
-    background-color: #f5f5f5;
+    background-color: #f9f7fe;
     font-family: 'Segoe UI', sans-serif;
     color: #333;
 }
 
-h1 {
+.idea-feed-wrapper {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(180, 150, 255, 0.2);
+}
+
+.idea-feed-wrapper h1 {
     text-align: center;
-    margin: 2rem 0 1rem;
+    font-size: 28px;
+    color: black;
+    margin-bottom: 1.5rem;
 }
 
 button {
     background-color: #a68dc1;
     color: white;
     border: none;
-    border-radius: 6px;
-    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 button:hover {
     background-color: #8a6ab7;
 }
 
-.idea-feed-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1.5rem;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
 .idea-container {
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
 }
 
 .idea-card {
-    flex: 0 0 auto;
-    width: 180px;
+    width: 220px;
     background: #ffffff;
     border-radius: 12px;
     padding: 1rem;
@@ -69,7 +69,7 @@ button:hover {
 
 .thumbnail-wrapper img {
     width: 100%;
-    height: 160px;
+    height: 150px;
     object-fit: cover;
     border-radius: 8px;
 }
@@ -78,14 +78,13 @@ button:hover {
     position: absolute;
     top: 8px;
     right: 8px;
-    font-size: 24px;
+    font-size: 22px;
     cursor: pointer;
 }
 
 .idea-card h2 {
     font-size: 1.1rem;
     margin: 0.5rem 0;
-    
     font-weight: bold;
     display: inline-block;
     position: relative;
@@ -105,21 +104,22 @@ button:hover {
     margin: 0.3rem 0;
     font-size: 0.95rem;
 }
+
 .idea-card a {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
 }
 
 .idea-card a:hover {
-    color: #5d3392; 
+    color: #5d3392;
 }
 
 .interest-btn {
     background-color: #e0d3f4;
     color: #5d3392;
     padding: 0.2rem 0.6rem;
-    font-size: 0.5rem;
+    font-size: 0.7rem;
     border-radius: 4px;
     margin: 0 0.2rem;
 }
@@ -135,9 +135,9 @@ button:hover {
 }
 
 .pagination a {
-    
     margin: 0 8px;
     text-decoration: none;
+    color: #5d3392;
 }
 
 .pagination span {
@@ -146,32 +146,35 @@ button:hover {
 }
 
 select {
-    margin-left: 1rem;
-    padding: 0.4rem;
-    border-radius: 6px;
-    border: 1px solid #aaa;
+    margin: 0 auto 1rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #cbb1ed;
+    background-color: #f9f7fe;
+    color: #5d3392;
+    font-weight: bold;
 }
 </style>
 
-
-<h1>💡 Idea list </h1>
-
-<form method="get">
-    <select name="order" onchange="this.form.submit()">
-        <option value="created_at" {% if order == 'created_at' %}selected{% endif %}>최신순</option>
-        <option value="interest" {% if order == 'interest' %}selected{% endif %}>관심도순</option>
-        <option value="title" {% if order == 'title' %}selected{% endif %}>이름순</option>
-    </select>
-</form>
-
-<hr>
 <div class="idea-feed-wrapper">
+    <h1>💡 Idea list </h1>
+
+    <form method="get"class="sort-form">
+        <select name="order" onchange="this.form.submit()">
+            <option value="created_at" {% if order == 'created_at' %}selected{% endif %}>최신순</option>
+            <option value="interest" {% if order == 'interest' %}selected{% endif %}>관심도순</option>
+            <option value="title" {% if order == 'title' %}selected{% endif %}>이름순</option>
+        </select>
+    </form>
+
+    <hr>
+
     <div class="idea-container">
         {% for idea in page_obj %}
             <div class="idea-card">
                 <div class="thumbnail-wrapper">
                     <img src="{{ idea.image.url }}" width="150" alt="썸네일">
-                    <span class="star star-icon" data-id="{{ idea.id }}">
+                    <span class="star-icon" data-id="{{ idea.id }}">
                         {% if idea.is_starred %}
                                 🌟
                         {% else %}
@@ -190,22 +193,22 @@ select {
                     <button class="interest-btn" data-id="{{ idea.id }}" data-action="increment">➕</button>
                 </p>
             </div>
-            <hr>
         {% empty %}
             <p>등록된 아이디어가 없습니다.</p>
         {% endfor %}
     </div>
-</div>
-<div class="pagination">
-    {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}&order={{ order }}">이전</a>
-    {% endif %}
 
-    <span>{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}&order={{ order }}">이전</a>
+        {% endif %}
 
-    {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}&order={{ order }}">다음</a>
-    {% endif %}
+        <span>{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&order={{ order }}">다음</a>
+        {% endif %}
+    </div>
 </div>
 
 <script>

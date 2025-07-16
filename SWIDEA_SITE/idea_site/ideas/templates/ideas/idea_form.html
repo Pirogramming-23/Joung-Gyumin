@@ -1,13 +1,111 @@
 {% extends 'ideas/base.html' %}
+
 {% block content %}
-<h1>{% if form.instance.pk %}아이디어 수정
-    {% else %}아이디어 등록{% endif %}</h1>
+<div class="page-wrapper">
+  <h1 style="color: #000;">
+    {% if form.instance.pk %}
+      ✏️ Idea Detail Update
+    {% else %}
+      💡 Idea Register
+    {% endif %}
+  </h1>
 
-<form method="post" enctype="multipart/form-data">
+  <form method="post" enctype="multipart/form-data" style="margin-top: 30px;">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% if form.instance.pk %}수정 완료{% else %}등록하기{% endif %}</button>
-</form>
+    <div class="form-wrapper">
+      {{ form.as_p }}
+    </div>
 
-<a href="{% url 'idea_list' %}">← 돌아가기</a>
+    <button type="submit" class="submit-btn">
+      {% if form.instance.pk %}수정 완료{% else %}등록하기{% endif %}
+    </button>
+  </form>
+
+  <a href="{% url 'idea_list' %}" class="register-btn">← 돌아가기</a>
+</div>
+
+<style>
+  body {
+    background-color: #f9f7fe;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+  }
+
+  .page-wrapper {
+    width : 50%;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(180, 150, 255, 0.2);
+  }
+
+  .page-wrapper h1 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000;
+  }
+
+  .register-btn {
+    display: inline-block;
+    background-color: #e0d3f4;
+    color: #5d3392;
+    font-weight: bold;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 30px;
+    text-decoration: none;
+  }
+
+  .register-btn:hover {
+    background-color: #cbb1ed;
+  }
+
+  .form-wrapper p {
+    margin-bottom: 18px;
+  }
+
+  .form-wrapper label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #444;
+  }
+
+  .form-wrapper input[type="text"],
+  .form-wrapper input[type="file"],
+  .form-wrapper textarea,
+  .form-wrapper select {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #faf9fd;
+    box-sizing: border-box;
+  }
+
+  .form-wrapper textarea {
+    min-height: 120px;
+  }
+
+  .submit-btn {
+    background-color: #cbb1ed;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin-top: 20px;
+  }
+
+  .submit-btn:hover {
+    background-color: #b79ce2;
+  }
+</style>
 {% endblock %}

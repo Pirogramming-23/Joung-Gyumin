@@ -73,8 +73,13 @@ def idea_update(request, idea_id):
             return redirect('idea_detail', idea_id=idea.id)
     else:
         form = IdeaForm(instance=idea)
+    
+    context={
+        'form': form,
+        'idea': idea,
+    }
 
-    return render(request, 'ideas/idea_form.html', {'form': form})
+    return render(request, 'ideas/idea_form.html', context)
 
 def idea_delete(request, idea_id):
     idea = get_object_or_404(Idea, id=idea_id)

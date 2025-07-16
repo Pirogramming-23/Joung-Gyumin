@@ -6,14 +6,31 @@ body {
   background-color: #f9f7fe;
   font-family: 'Segoe UI', sans-serif;
   color: #333;
+  margin: 0;
+  padding: 0;
 }
+
+.page-wrapper {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(180, 150, 255, 0.2);
+}
+
 .page-title {
   text-align: center;
-  font-size: 1.6rem;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: bold;
   color: black;
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.5px;
+  margin-bottom: 30px;
+}
+.tool-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #000;
 }
 
 .devtool-detail-container {
@@ -35,7 +52,6 @@ body {
 
 .devtool-info {
   margin-bottom: 30px;
-  
 }
 
 .devtool-info p {
@@ -102,8 +118,10 @@ hr {
   background-color: #d7c6ff;
 }
 </style>
-<h1 class="page-title">DevTool Detail</h1>
-<div class="devtool-detail-container">
+
+<div class="page-wrapper">
+  <h1 class="page-title">DevTool Detail</h1>
+
   <h1 class="tool-title">🛠️ {{ tool.name }}</h1>
 
   <div class="devtool-info">

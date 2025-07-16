@@ -1,30 +1,34 @@
 .navbar {
-  background-color: #1e1e1e;
-  color: white;
-  padding: 15px 40px;
+  background-color: #f5f2fc;
+  padding: 16px 40px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   font-family: 'Segoe UI', sans-serif;
-  font-size: 18px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .navbar .logo {
-  font-weight: bold;
-  color: #aaffcc;
+  font-weight: 800;
+  font-size: 22px;
+  color: #5d3392;
 }
 
 .navbar .logo span {
-  color: gold;
+  color: #a68dc1;
 }
 
 .navbar a {
-  margin-right: 30px;
-  color: white;
+  margin-left: 30px;
+  font-weight: 500;
+  color: #444;
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .navbar a:hover {
-  color: #00f2ff;
+  background-color: #e0d3f4;
+  color: #5d3392;
 }

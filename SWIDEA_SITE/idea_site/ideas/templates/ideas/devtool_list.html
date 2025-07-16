@@ -2,19 +2,111 @@
 {% block title %}개발툴 목록{% endblock %}
 
 {% block content %}
-<h1>🛠️ 개발툴 목록</h1>
+<style>
+body {
+  background-color: #f9f7fe;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
 
-<a href="{% url 'devtool_create' %}">
-    <button>➕ 개발툴 등록</button>
-</a>
+.page-wrapper {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(180, 150, 255, 0.2);
+}
 
-<hr>
+.page-wrapper h1 {
+  font-size: 28px;
+  text-align: center;
+  color: #5d3392;
+  margin-bottom: 20px;
+}
 
-{% for tool in tools %}
-    <p>
-        🔗 <a href="{% url 'devtool_detail' tool.id %}">{{ tool.name }}</a> ({{ tool.kind }})
-    </p>
-{% empty %}
-    <p>등록된 개발툴이 없습니다.</p>
-{% endfor %}
+.page-wrapper .register-btn {
+  display: inline-block;
+  background-color: #e0d3f4;
+  color: #5d3392;
+  font-weight: bold;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.page-wrapper .register-btn:hover {
+  background-color: #cbb1ed;
+}
+
+.devtool-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.devtool-table th,
+.devtool-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  vertical-align: top;
+}
+
+.devtool-table th {
+  background-color: #f2eaff;
+  color: #5d3392;
+  font-weight: 600;
+}
+
+.devtool-table tr:hover {
+  background-color: #f9f3ff;
+}
+
+.devtool-table a {
+  color: #7a4de8;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.devtool-table a:hover {
+  text-decoration: underline;
+}
+</style>
+
+<div class="page-wrapper">
+    <h1>🛠️ DevTool list</h1>
+
+    <a href="{% url 'devtool_create' %}">
+        <button>➕ 개발툴 등록</button>
+    </a>
+
+    <hr>
+    <table class="devtool-table">
+        <thead>
+        <tr>
+            <th>이름</th>
+            <th>분류</th>
+            <th>내용</th>
+        </tr>
+        </thead>
+        <tbody>
+
+            {% for tool in tools %}
+                <tr>
+                    <td>
+                        🔗 <a href="{% url 'devtool_detail' tool.id %}">{{ tool.name }}</a>
+                    </td>
+                    <td>{{ tool.kind }}</td>
+                    <td>{{ tool.content }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">등록된 개발툴이 없습니다.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

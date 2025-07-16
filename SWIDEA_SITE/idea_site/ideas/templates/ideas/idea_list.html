@@ -4,13 +4,157 @@
 {% block title %}아이디어 리스트{% endblock %}
 
 {% block content %}
-<h1>💡 아이디어 리스트</h1>
+<style>
+body {
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
 
-<p>
-    <a href="{% url 'idea_create' %}">
-        <button>➕ 아이디어 등록하기</button>
-    </a>
-</p>
+h1 {
+    text-align: center;
+    margin: 2rem 0 1rem;
+}
+
+button {
+    background-color: #a68dc1;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+button:hover {
+    background-color: #8a6ab7;
+}
+
+.idea-feed-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.idea-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.idea-card {
+    flex: 0 0 auto;
+    width: 180px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.idea-card:hover {
+    transform: translateY(-4px);
+}
+
+.thumbnail-wrapper {
+    position: relative;
+    margin-bottom: 0.8rem;
+}
+
+.thumbnail-wrapper img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.star-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.idea-card h2 {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+}
+
+.idea-card h2::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-top: 10px;
+  background: linear-gradient(to right, rgba(93, 51, 146, 0.2), rgba(0, 0, 0, 0.05), rgba(93, 51, 146, 0.2));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.idea-card p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+}
+.idea-card a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.idea-card a:hover {
+    color: #5d3392; 
+}
+
+.interest-btn {
+    background-color: #e0d3f4;
+    color: #5d3392;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.5rem;
+    border-radius: 4px;
+    margin: 0 0.2rem;
+}
+
+.interest-btn:hover {
+    background-color: #c3aee3;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+.pagination a {
+    
+    margin: 0 8px;
+    text-decoration: none;
+}
+
+.pagination span {
+    margin: 0 12px;
+    font-weight: 500;
+}
+
+select {
+    margin-left: 1rem;
+    padding: 0.4rem;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+}
+</style>
+
+
+<h1>💡 Idea list </h1>
 
 <form method="get">
     <select name="order" onchange="this.form.submit()">
@@ -21,48 +165,92 @@
 </form>
 
 <hr>
-
-{% for idea in ideas %}
-    <div>
-        <img src="{{ idea.image.url }}" width="150">
-        <h2>
-            <a href="{% url 'idea_detail' idea.id %}">{{ idea.title }}</a>
-            <span class="star star-icon" data-id="{{ idea.id }}">
-                {% if idea.is_starred %}
-                    🌟
-                {% else %}
-                    ⭐
-                {% endif %}
-            </span>
-        </h2>
-        <p>{{ idea.content|truncatewords:20 }}</p>
-        <p>관심도: {{ idea.interest }}</p>
+<div class="idea-feed-wrapper">
+    <div class="idea-container">
+        {% for idea in page_obj %}
+            <div class="idea-card">
+                <div class="thumbnail-wrapper">
+                    <img src="{{ idea.image.url }}" width="150" alt="썸네일">
+                    <span class="star star-icon" data-id="{{ idea.id }}">
+                        {% if idea.is_starred %}
+                                🌟
+                        {% else %}
+                                ⭐
+                        {% endif %}
+                    </span>
+                </div>
+                <h2>
+                    <a href="{% url 'idea_detail' idea.id %}">{{ idea.title }}</a>
+                </h2>
+                <p>{{ idea.content|truncatewords:20 }}</p>
+                <p>
+                    관심도:
+                    <button class="interest-btn" data-id="{{ idea.id }}" data-action="decrement">➖</button>
+                    <span id="interest-{{ idea.id }}">{{ idea.interest }}</span>
+                    <button class="interest-btn" data-id="{{ idea.id }}" data-action="increment">➕</button>
+                </p>
+            </div>
+            <hr>
+        {% empty %}
+            <p>등록된 아이디어가 없습니다.</p>
+        {% endfor %}
     </div>
-    <hr>
-{% empty %}
-    <p>등록된 아이디어가 없습니다.</p>
-{% endfor %}
+</div>
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}&order={{ order }}">이전</a>
+    {% endif %}
+
+    <span>{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}&order={{ order }}">다음</a>
+    {% endif %}
+</div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const stars = document.querySelectorAll(".star-icon");
+    document.addEventListener("DOMContentLoaded", function () {
+        const stars = document.querySelectorAll(".star-icon");
 
-    stars.forEach(star => {
-        star.addEventListener("click", function () {
-            const ideaId = this.dataset.id;
-            fetch(`/ideas/${ideaId}/toggle_star/`, {
-                method: "POST",
-                headers: {
-                    "X-CSRFToken": "{{ csrf_token }}",
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                this.textContent = data.is_starred ? "🌟" : "⭐";
+        stars.forEach(star => {
+            star.addEventListener("click", function () {
+                const ideaId = this.dataset.id;
+                fetch(`/ideas/${ideaId}/toggle_star/`, {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}",
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    this.textContent = data.is_starred ? "🌟" : "⭐";
+                });
             });
         });
     });
-});
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.interest-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const ideaId = this.dataset.id;
+                const action = this.dataset.action;
+
+                fetch(`/ideas/${ideaId}/adjust_interest/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `action=${action}`
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById(`interest-${ideaId}`).textContent = data.interest;
+                    }
+                });
+            });
+        });
+    });
 </script>
 
 {% endblock %}

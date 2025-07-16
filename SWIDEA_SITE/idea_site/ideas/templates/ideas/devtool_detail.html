@@ -1,33 +1,156 @@
 {% extends 'ideas/base.html' %}
 {% block content %}
-<h1>🛠️ {{ tool.name }}</h1>
-<p><strong>종류:</strong> {{ tool.kind }}</p>
-<p><strong>설명:</strong> {{ tool.content }}</p>
 
-<hr>
-<h2>💡 이 개발툴을 사용하는 아이디어</h2>
+<style>
+body {
+  background-color: #f9f7fe;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+.page-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
 
-{% for idea in ideas %}
-    <p>🔗 <a href="{% url 'idea_detail' idea.id %}">{{ idea.title }}</a></p>
-{% empty %}
-    <p>아직 이 툴을 사용하는 아이디어가 없습니다.</p>
-{% endfor %}
+.devtool-detail-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(180, 150, 255, 0.2);
+}
 
-<hr>
-<a href="{% url 'devtool_list' %}">← 목록</a> |
-<a href="{% url 'devtool_update' tool.id %}">✏️ 수정</a> |
-<form action="{% url 'devtool_delete' tool.id %}" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-    {% csrf_token %}
-    <button type="submit">🗑️ 삭제</button>
-</form>
+.tool-title {
+  
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #000;
+}
+
+.devtool-info {
+  margin-bottom: 30px;
+  
+}
+
+.devtool-info p {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+.devtool-info strong {
+  display: inline-block;
+  min-width: 60px;
+  color: #444;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 30px 0 20px;
+  color: #111;
+}
+
+.idea-list p {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.idea-list a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #7a4de8;
+}
+
+.idea-list a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  margin: 30px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.action-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.action-buttons a,
+.action-buttons button {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 8px 16px;
+  background-color: #ede3ff;
+  color: #5d3392;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.action-buttons a:hover,
+.action-buttons button:hover {
+  background-color: #d7c6ff;
+}
+</style>
+<h1 class="page-title">DevTool Detail</h1>
+<div class="devtool-detail-container">
+  <h1 class="tool-title">🛠️ {{ tool.name }}</h1>
+
+  <div class="devtool-info">
+    <p><strong>종류:</strong> {{ tool.kind }}</p>
+    <p><strong>설명:</strong> {{ tool.content }}</p>
+  </div>
+
+  <hr>
+
+  <h2 class="section-title">💡 이 개발툴을 사용하는 아이디어</h2>
+
+  <div class="idea-list">
+    {% for idea in ideas %}
+      <p>🔗 <a href="{% url 'idea_detail' idea.id %}">{{ idea.title }}</a></p>
+    {% empty %}
+      <p>아직 이 툴을 사용하는 아이디어가 없습니다.</p>
+    {% endfor %}
+  </div>
+
+  <hr>
+
+  <div class="action-buttons">
+    <a href="{% url 'devtool_list' %}">← 목록</a>
+    <a href="{% url 'devtool_update' tool.id %}">✏️ 수정</a>
+    <form action="{% url 'devtool_delete' tool.id %}" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+      {% csrf_token %}
+      <button type="submit">🗑️ 삭제</button>
+    </form>
+  </div>
+</div>
 {% endblock %}
 
 {% comment %} 지금안되는 거
 1) 정렬기능 -완료
-2) 아이디어 게시물 찜하기 안됨 - 개어렵네
-3) 관심도 조절 버튼
+2) 아이디어 게시물 찜하기 안됨 - 일단 완료 : 디자인 수정 필요
+3) 관심도 조절 버튼 - 가능해짐
 4)devtool 클릭 시 해당 개발툴의 디테일 페이지로 이동
-5)찜 여부 표시
-6) 해당 개발툴을 사용하는 아이디어 리스트
-7)아이디어 title 클릭 시 해당 아이디어 디테일 페이지로 이동
+5)찜 여부 표시 - 됨
+6) 해당 개발툴을 사용하는 아이디어 리스트 - 됨
+7)아이디어 title 클릭 시 해당 아이디어 디테일 페이지로 이동 -됨
+ {% endcomment %}
+
+ {% comment %} 새롭게 안되는거
+ 안할래 - 1) 자유긴 한데 찜하기순 안만듬 
+ 완료 -2) 별 아이디어 썸네일 위에 표시 
+ 완료 -3)AJAX를 사용하여 페이지 리로딩 없이 처리(javascript)
+ 4) 챌린지..?한 페이지 당 게시물 4개씩만 보여주는 페이지네이션 처리
+ 아닌거 같음 - 5) 툴 여러개 선택 가능하게 해야하나..?
+ 완료 - 6) 아이디어 디테일 페이지에서 devtool 클릭 시 해당 개발툴의 디테일 페이지로 이동
  {% endcomment %}

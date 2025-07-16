@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404
 from .models import DevTool
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.core.paginator import Paginator
 
 # Create your views here.
 def idea_list(request):
@@ -26,7 +28,12 @@ def idea_list(request):
     for idea in ideas:
         idea.is_starred = idea.id in user_starred_ids
 
+    paginator = Paginator(ideas, 4)  
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
+        'page_obj': page_obj,
         'ideas': ideas,
         'order' : order,
     }
@@ -46,6 +53,15 @@ def idea_create(request):
 
 def idea_detail(request, idea_id):
     idea = get_object_or_404(Idea, id=idea_id)
+
+    if request.user.is_authenticated:
+        is_starred = IdeaStar.objects.filter(user=request.user, idea=idea).exists()
+    else:
+        starred_ids = request.session.get('starred_ideas', [])
+        is_starred = idea.id in starred_ids
+
+    idea.is_starred = is_starred 
+
     return render(request, 'ideas/idea_detail.html', {'idea': idea})
 
 def idea_update(request, idea_id):
@@ -135,3 +151,20 @@ def toggle_star(request, idea_id):
         request.session['starred_ideas'] = starred_ideas
 
     return JsonResponse({'is_starred': is_starred})
+
+@require_POST
+@csrf_exempt 
+def adjust_interest(request, idea_id):
+    try:
+        idea = Idea.objects.get(id=idea_id)
+        action = request.POST.get('action')
+
+        if action == 'increment':
+            idea.interest += 1
+        elif action == 'decrement' and idea.interest > 0:
+            idea.interest -= 1
+
+        idea.save()
+        return JsonResponse({'success': True, 'interest': idea.interest})
+    except Idea.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Idea not found'})

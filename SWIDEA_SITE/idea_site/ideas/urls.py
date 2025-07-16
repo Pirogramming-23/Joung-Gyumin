@@ -13,5 +13,5 @@ urlpatterns = [
     path('tools/<int:tool_id>/update/', views.devtool_update, name='devtool_update'),
     path('tools/<int:tool_id>/delete/', views.devtool_delete, name='devtool_delete'),
     path('ideas/<int:idea_id>/toggle_star/', views.toggle_star, name='toggle_star'),
-
+    path('ideas/<int:idea_id>/adjust_interest/', views.adjust_interest, name='adjust_interest'),
 ]

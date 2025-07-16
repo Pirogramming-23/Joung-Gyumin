@@ -7,34 +7,29 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 
 # Create your views here.
 def idea_list(request):
-    order = request.GET.get('order', 'created_at')  # 기본은 최신순
+    order = request.GET.get('order', 'created_at')
     if order == 'interest':
-        ideas = Idea.objects.all().order_by('-interest')
-    elif order == 'title':
-        ideas = Idea.objects.all().order_by('title')
+        order = '-interest'
     elif order == 'created_at':
-        ideas = Idea.objects.all().order_by('-created_at')
-    else:
-        ideas = Idea.objects.all()
-    
-    if request.user.is_authenticated:
-        user_starred_ids = IdeaStar.objects.filter(user=request.user).values_list('idea_id', flat=True)
-    else:
-        user_starred_ids = request.session.get('starred_ideas', [])
-    
-    for idea in ideas:
-        idea.is_starred = idea.id in user_starred_ids
+        order = '-created_at'
+
+    ideas = Idea.objects.all().order_by(order)
 
     paginator = Paginator(ideas, 4)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        html = render_to_string('ideas/partials/idea_cards.html', {'page_obj': page_obj, 'order': order})
+        return JsonResponse({'html': html})
+
     context = {
         'page_obj': page_obj,
-        'ideas': ideas,
         'order' : order,
     }
     return render(request, 'ideas/idea_list.html', context)

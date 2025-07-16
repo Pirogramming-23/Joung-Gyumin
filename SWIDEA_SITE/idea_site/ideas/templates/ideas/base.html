@@ -3,6 +3,7 @@
 <html lang="ko">
     <head>
         <meta charset="UTF-8">
+        <meta name="csrf-token" content="{{ csrf_token }}">
         <title>{% block title %}My Idea Site{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
     </head>
@@ -18,6 +19,17 @@
                 <a href="{% url 'idea_create' %}">아이디어 등록</a>
                 <a href="{% url 'devtool_list' %}">개발툴 관리</a>
                 <a href="{% url 'devtool_create' %}">개발툴 등록</a>
+            </div>
+            <div>
+                {% if user.is_authenticated %}
+                    <span>{{ user.username }}님 환영합니다!</span>
+                    <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">로그아웃</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">로그인</a>
+                {% endif %}
             </div>
         </nav>
 

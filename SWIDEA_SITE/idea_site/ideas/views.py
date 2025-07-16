@@ -9,8 +9,11 @@ from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+
 def idea_list(request):
     order = request.GET.get('order', 'created_at')
     if order == 'interest':
@@ -20,19 +23,31 @@ def idea_list(request):
 
     ideas = Idea.objects.all().order_by(order)
 
-    paginator = Paginator(ideas, 4)  
+    paginator = Paginator(ideas, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        html = render_to_string('ideas/partials/idea_cards.html', {'page_obj': page_obj, 'order': order})
-        return JsonResponse({'html': html})
+    starred_ids = []
+    if request.user.is_authenticated:
+        starred_ids = IdeaStar.objects.filter(user=request.user).values_list('idea_id', flat=True)
 
     context = {
         'page_obj': page_obj,
-        'order' : order,
+        'order': order,
+        'starred_ids': starred_ids, 
     }
+
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        html = render_to_string(
+            'ideas/partials/idea_cards.html',
+            context, 
+            request=request
+        )
+        return JsonResponse({'html': html})
+
     return render(request, 'ideas/idea_list.html', context)
+
 
 
 def idea_create(request):

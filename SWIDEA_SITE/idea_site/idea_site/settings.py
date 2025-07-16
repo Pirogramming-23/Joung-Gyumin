@@ -128,3 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+LOGIN_REDIRECT_URL = 'idea_list'       # 로그인 후 이동
+LOGOUT_REDIRECT_URL = 'idea_list'      # 로그아웃 후 이동
+LOGIN_URL = 'login'                    # 로그인 필요한 페이지 접근 시 이동 경로

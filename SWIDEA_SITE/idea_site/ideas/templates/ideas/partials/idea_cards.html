@@ -3,7 +3,11 @@
         <div class="thumbnail-wrapper">
             <img src="{{ idea.image.url }}" width="150">
             <span class="star-icon" data-id="{{ idea.id }}">
-                {% if idea.is_starred %}🌟{% else %}⭐{% endif %}
+                {% if idea.id in starred_ids %}
+                    🌟
+                {% else %}
+                    ⭐
+                {% endif %}
             </span>
         </div>
         <h2><a href="{% url 'idea_detail' idea.id %}">{{ idea.title }}</a></h2>

@@ -1,0 +1,276 @@
+{% extends 'ideas/base.html' %}
+<meta name="csrf-token" content="{{ csrf_token }}">
+
+{% block title %}아이디어 리스트{% endblock %}
+
+{% block content %}
+<style>
+body {
+    background-color: #f9f7fe;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+.idea-feed-wrapper {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(180, 150, 255, 0.2);
+}
+
+.idea-feed-wrapper h1 {
+    text-align: center;
+    font-size: 28px;
+    color: black;
+    margin-bottom: 1.5rem;
+}
+
+button {
+    background-color: #a68dc1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #8a6ab7;
+}
+
+.idea-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.idea-card {
+    width: 220px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.idea-card:hover {
+    transform: translateY(-4px);
+}
+
+.thumbnail-wrapper {
+    position: relative;
+    margin-bottom: 0.8rem;
+}
+
+.thumbnail-wrapper img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.star-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.idea-card h2 {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+}
+
+.idea-card h2::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-top: 10px;
+  background: linear-gradient(to right, rgba(93, 51, 146, 0.2), rgba(0, 0, 0, 0.05), rgba(93, 51, 146, 0.2));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.idea-card p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+}
+
+.idea-card a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.idea-card a:hover {
+    color: #5d3392;
+}
+
+.interest-btn {
+    background-color: #e0d3f4;
+    color: #5d3392;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+    border-radius: 4px;
+    margin: 0 0.2rem;
+}
+
+.interest-btn:hover {
+    background-color: #c3aee3;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+.pagination a {
+    margin: 0 8px;
+    text-decoration: none;
+    color: #5d3392;
+}
+
+.pagination span {
+    margin: 0 12px;
+    font-weight: 500;
+}
+
+select {
+    margin: 0 auto 1rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #cbb1ed;
+    background-color: #f9f7fe;
+    color: #5d3392;
+    font-weight: bold;
+}
+</style>
+
+<div class="idea-feed-wrapper">
+    <h1>💡 Idea list </h1>
+
+    <select id="order-select" class="sort-form">
+        <option value="created_at" {% if order == 'created_at' %}selected{% endif %}>최신순</option>
+        <option value="interest" {% if order == 'interest' %}selected{% endif %}>관심도순</option>
+        <option value="title" {% if order == 'title' %}selected{% endif %}>이름순</option>
+    </select>
+    
+    <hr>
+
+    <div id="idea-list" class="idea-container">
+        {% include 'ideas/partials/idea_cards.html' %}
+    </div>
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}&order={{ order }}">이전</a>
+        {% endif %}
+        <span>{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&order={{ order }}">다음</a>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+function getCSRFToken() {
+    return document.querySelector("meta[name='csrf-token']").getAttribute("content");
+}
+
+
+/* [1] 찜하기  */
+function attachStarHandlers() {
+    document.querySelectorAll(".star-icon").forEach(star => {
+        star.addEventListener("click", function () {
+            const ideaId = this.dataset.id;
+            fetch(`/ideas/${ideaId}/toggle_star/`, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCSRFToken(),
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                this.textContent = data.is_starred ? "🌟" : "⭐";
+            });
+        });
+    });
+}
+
+
+/*  [2] 관심도 */
+function attachInterestHandlers() {
+    document.querySelectorAll('.interest-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const ideaId = this.dataset.id;
+            const action = this.dataset.action;
+
+            fetch(`/ideas/${ideaId}/adjust_interest/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCSRFToken(),
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=${action}`
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById(`interest-${ideaId}`).textContent = data.interest;
+
+                    const currentOrder = document.getElementById("order-select").value;
+                    if (currentOrder === "interest") {
+                        fetch(`/?order=interest`, {
+                            headers: {
+                                "X-Requested-With": "XMLHttpRequest"
+                            }
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            document.getElementById("idea-list").innerHTML = data.html;
+                            attachStarHandlers();
+                            attachInterestHandlers();
+                        });
+                    }
+                }
+            });
+        });
+    });
+}
+
+
+/*[3] 정렬 기준 변경 시 처리 */
+document.addEventListener("DOMContentLoaded", function () {
+    attachStarHandlers();
+    attachInterestHandlers();
+
+    document.getElementById("order-select").addEventListener("change", function () {
+        const selectedOrder = this.value;
+
+        fetch(`/?order=${selectedOrder}`, {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            },
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("idea-list").innerHTML = data.html;
+
+            attachStarHandlers();
+            attachInterestHandlers();
+        });
+    });
+});
+</script>
+
+{% endblock %}

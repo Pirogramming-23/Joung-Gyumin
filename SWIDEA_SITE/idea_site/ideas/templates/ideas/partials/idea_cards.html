@@ -1,0 +1,25 @@
+{% for idea in page_obj %}
+    <div class="idea-card">
+        <div class="thumbnail-wrapper">
+            <img src="{{ idea.image.url }}" width="150">
+            <span class="star-icon" data-id="{{ idea.id }}">
+                {% if idea.id in starred_ids %}
+                    🌟
+                {% else %}
+                    ⭐
+                {% endif %}
+            </span>
+        </div>
+        <h2><a href="{% url 'idea_detail' idea.id %}">{{ idea.title }}</a></h2>
+        <p>{{ idea.content|truncatewords:20 }}</p>
+        <p>
+            관심도:
+            <button class="interest-btn" data-id="{{ idea.id }}" data-action="decrement">➖</button>
+            <span id="interest-{{ idea.id }}">{{ idea.interest }}</span>
+            <button class="interest-btn" data-id="{{ idea.id }}" data-action="increment">➕</button>
+        </p>
+    </div>
+{% empty %}
+    <p>등록된 아이디어가 없습니다.</p>
+{% endfor %}
+

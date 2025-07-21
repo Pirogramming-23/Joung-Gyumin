@@ -40,12 +40,12 @@ def post_list(request):
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
-        images = request.FILES.getlist('images')  # 여러 파일 받기
+        images = request.FILES.getlist('images')  
 
         if form.is_valid():
-            post = form.save(commit=False)   # 아직 저장하지 않음
-            post.author = request.user       # 작성자 지정
-            post.save()                      # 이제 저장
+            post = form.save(commit=False)   
+            post.author = request.user       
+            post.save()                      
 
             for img in images:
                 PostImage.objects.create(post=post, image=img)

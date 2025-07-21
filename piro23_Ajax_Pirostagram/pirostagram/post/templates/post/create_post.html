@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 작성</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5f5f5;
+            padding: 2rem;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        form label {
+            font-weight: bold;
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        form input[type="file"],
+        form textarea {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        form textarea {
+            min-height: 120px;
+        }
+
+        button {
+            margin-top: 1.5rem;
+            padding: 10px 20px;
+            background-color: #4a90e2; /* 파란색 */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #357ABD; /* 진한 파랑 */
+        }
+
+        .back-link {
+            margin-top: 1.5rem;
+            display: inline-block;
+            color: #2b6cb0; /* 링크용 파랑 */
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>새 게시물 만들기</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+            <label for="id_images">Images:</label>
+            <input type="file" name="images" id="id_images" multiple> <!-- multiple 속성 중요 -->
+
+            <button type="submit">업로드</button>
+        </form>
+        <a class="back-link" href="{% url 'post_list' %}">← 목록으로</a>
+    </div>
+</body>
+</html>

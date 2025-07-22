@@ -1,0 +1,469 @@
+/* body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+}
+.sidebar {
+    background-color: #ffffff;  
+    color: #000000;
+    width: 250px;
+    height: 100vh;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    position: fixed;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.nav {
+    list-style: none;
+    padding: 0;
+}
+
+.nav li {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+.icon svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.nav li:hover {
+    background-color: #f0f0f0;
+}
+
+.nav li .icon {
+    font-size: 20px;
+    margin-right: 12px;
+}
+
+.nav li .text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.feed-wrapper {
+    max-width: 600px;
+    margin: 40px auto;
+    background: white;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    overflow: hidden;
+    
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    font-weight: bold;
+}
+
+.post-header span {
+    margin-left: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+.post-image-slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    border-radius: 12px;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.3s ease;
+    width: fit-content;
+}
+
+.slider-image {
+    width: 100%;
+    flex: 0 0 100%;
+    object-fit: cover;
+    border-radius: 1px;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.8);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    padding: 6px 10px;
+    border-radius: 50%;
+}
+
+.slider-btn.left {
+    left: 10px;
+}
+
+.slider-btn.right {
+    right: 10px;
+}
+
+.post-caption {
+    padding: 12px;
+    font-size: 15px;
+}
+
+.post-actions {
+    padding: 0 12px;
+    margin-top: 4px;
+}
+
+.post-actions button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 8px;
+}
+
+.like-count {
+    font-weight: bold;
+    padding: 0 12px;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.comment-section {
+    padding: 0 12px 12px 12px;
+    font-size: 14px;
+}
+
+.comment-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-section li {
+    margin-bottom: 4px;
+}
+
+.comment-form {
+    display: flex;
+    padding: 12px;
+    border-top: 1px solid #eee;
+}
+
+.comment-form input {
+    flex: 1;
+    border: none;
+    padding: 8px;
+    font-size: 14px;
+    background: #f0f0f0;
+    border-radius: 20px;
+}
+
+.comment-form button {
+    background: none;
+    border: none;
+    color: #0095f6;
+    font-weight: bold;
+    margin-left: 8px;
+    cursor: pointer;
+}
+.comment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.comment-left {
+  flex: 1;
+  text-align: left;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 10px;
+}
+
+.delete-button:hover {
+  text-decoration: underline;
+}
+
+.delete-post-button {
+    background: none;
+    color: red;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 8px;
+} */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fafafa;
+    display: flex;
+}
+
+/* 사이드바 */
+.sidebar {
+    background-color: #ffffff;
+    width: 250px;
+    height: 100vh;
+    padding: 30px 20px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    position: fixed;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.nav {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.nav li {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.nav li:hover {
+    background-color: #f0f0f0;
+}
+
+.icon {
+    margin-right: 12px;
+}
+
+.icon svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+}
+
+/* 메인 콘텐츠 */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 40px 20px;
+    background-color: #fafafa;
+}
+
+/* 피드 카드 */
+.feed-wrapper {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.02);
+}
+
+/* 헤더 */
+.post-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.post-header span {
+    color: #888;
+    font-size: 12px;
+}
+
+/* 이미지 슬라이더 */
+.post-image-slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 12px;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.slider-image {
+    width: 100%;
+    flex: 0 0 100%;
+    object-fit: cover;
+}
+
+/* 슬라이더 버튼 */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    padding: 6px 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
+.slider-btn.left {
+    left: 10px;
+}
+
+.slider-btn.right {
+    right: 10px;
+}
+
+/* 좋아요 및 캡션 */
+.post-actions {
+    padding: 10px 16px 0;
+    display: flex;
+    align-items: center;
+}
+
+.post-actions button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+.like-count {
+    font-weight: 600;
+    padding: 0 16px;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.post-caption {
+    padding: 0 16px 8px;
+    font-size: 14px;
+}
+
+/* 댓글 */
+.comment-section {
+    padding: 0 16px 12px;
+    font-size: 14px;
+}
+
+.comment-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.comment-left {
+    flex: 1;
+    text-align: left;
+}
+
+/* 댓글 삭제 버튼 */
+.delete-button {
+    background: none;
+    border: none;
+    color: #ed4956;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.delete-button:hover {
+    text-decoration: underline;
+}
+
+/* 댓글 입력 */
+.comment-form {
+    display: flex;
+    padding: 12px 16px;
+    border-top: 1px solid #eee;
+}
+
+.comment-form input {
+    flex: 1;
+    border: none;
+    padding: 10px 14px;
+    font-size: 14px;
+    background: #efefef;
+    border-radius: 20px;
+}
+
+.comment-form button {
+    background: none;
+    border: none;
+    color: #0095f6;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* 피드 삭제 버튼 */
+.delete-post-button {
+    background: none;
+    border: none;
+    color: #ed4956;
+    font-size: 13px;
+    cursor: pointer;
+    margin-left: 8px;
+    font-weight: 500;
+}
+
+.delete-post-button:hover {
+    text-decoration: underline;
+}
